@@ -1,0 +1,24 @@
+{
+  "name": "holdup",
+  "version": "0.1.0",
+  "description": "Stops the 'sent you money by mistake, please send it back' scam for small PayPal sellers, and refunds the original payment safely.",
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": ">=23.6" },
+  "scripts": {
+    "start": "node src/server.ts",
+    "dev": "node --watch src/server.ts",
+    "test": "node --test test/",
+    "typecheck": "tsc --noEmit",
+    "seed": "node scripts/seed-sandbox.ts",
+    "eval": "node scripts/eval-patterns.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "2.1.5",
+    "hono": "4.13.14"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  }
+}

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hold Up</title>
+  <meta name="description" content="Spots the 'sent you money by mistake, send it back' scam and refunds the original PayPal payment safely.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23F2C230'/><path d='M9 17V9.5a1.5 1.5 0 0 1 3 0V15m0-6.5a1.5 1.5 0 0 1 3 0V15m0-6a1.5 1.5 0 0 1 3 0v6m0-4a1.5 1.5 0 0 1 3 0v7c0 4-3 7-7 7h-1c-3 0-5-2-6-4l-1.5-3a1.5 1.5 0 0 1 2.6-1.5L9 17' fill='none' stroke='%231B2333' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="bar">
+    <a class="brand" href="#" aria-label="Hold Up home">
+      <span class="brand-mark" aria-hidden="true"></span>Hold Up
+    </a>
+    <nav class="tabs" aria-label="Sections">
+      <button class="tab" data-view="payments" aria-current="page">Payments</button>
+      <button class="tab" data-view="orders">Orders</button>
+      <button class="tab" data-view="senders">Known senders</button>
+      <button class="tab" data-view="history">History</button>
+    </nav>
+    <div class="status" id="status" aria-live="polite"></div>
+  </header>
+
+  <main>
+    <section class="view" id="view-payments">
+      <aside class="inbox">
+        <div class="inbox-tools">
+          <button class="btn small" id="sync">Check for new payments</button>
+          <button class="btn small ghost" id="open-lookup">Add by transaction ID</button>
+        </div>
+        <form class="lookup" id="lookup" hidden>
+          <label>Transaction ID <input name="id" required autocomplete="off" placeholder="From PayPal's “You've got money” email"></label>
+          <label>Sender's email <input name="payerEmail" type="email" placeholder="Optional"></label>
+          <label>Sender's name <input name="payerName" placeholder="Optional"></label>
+          <label>Note on the payment <input name="note" placeholder="Optional"></label>
+          <button class="btn small" type="submit">Add payment</button>
+        </form>
+        <ol class="payments" id="payments" aria-label="Incoming payments"></ol>
+      </aside>
+      <article class="case" id="case" tabindex="-1">
+        <div class="empty">
+          <p>Pick a payment to see what Hold Up found.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="view" id="view-orders" hidden>
+      <div class="page">
+        <h1>Orders</h1>
+        <p class="lede">Hold Up matches incoming money against these. Money that matches nothing, or pays more than the order, gets flagged.</p>
+        <form class="row-form" id="order-form">
+          <input name="description" required placeholder="What they bought">
+          <input name="total" required inputmode="decimal" placeholder="Total, $">
+          <input name="buyerName" placeholder="Buyer's name">
+          <input name="buyerEmail" type="email" placeholder="Buyer's PayPal email">
+          <button class="btn small" type="submit">Add order</button>
+        </form>
+        <table class="grid" id="orders"></table>
+      </div>
+    </section>
+
+    <section class="view" id="view-senders" hidden>
+      <div class="page">
+        <h1>Known senders</h1>
+        <p class="lede">Customers you trust, and payout senders such as marketplaces or settlement administrators. Real payouts often look like scams, so list the ones you expect.</p>
+        <form class="row-form" id="sender-form">
+          <input name="name" placeholder="Name">
+          <input name="email" type="email" required placeholder="PayPal email">
+          <select name="kind" aria-label="Kind"><option value="customer">Customer</option><option value="payout">Payout sender</option></select>
+          <input name="note" placeholder="Note">
+          <button class="btn small" type="submit">Add sender</button>
+        </form>
+        <table class="grid" id="senders"></table>
+      </div>
+    </section>
+
+    <section class="view" id="view-history" hidden>
+      <div class="page">
+        <h1>History</h1>
+        <p class="lede">Everything Hold Up did, and every refund it sent to PayPal.</p>
+        <table class="grid" id="history"></table>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="refund-dialog" aria-labelledby="refund-title">
+    <form method="dialog" id="refund-form">
+      <h2 id="refund-title">Refund the original payment</h2>
+      <p class="dialog-copy">PayPal sends this back to the card or account the sender paid with. If their payment was stolen money, the refund goes back to the real owner, not to the scammer.</p>
+      <label class="amount-field">Amount to refund
+        <span class="money-input"><span aria-hidden="true">$</span><input name="amount" inputmode="decimal" required></span>
+      </label>
+      <p class="fee-note" id="fee-note"></p>
+      <label>Type the amount again to confirm
+        <input name="confirm" inputmode="decimal" required autocomplete="off">
+      </label>
+      <p class="form-error" id="refund-error" role="alert"></p>
+      <div class="dialog-actions">
+        <button class="btn ghost" value="cancel" formnovalidate>Cancel</button>
+        <button class="btn safe" id="refund-submit" value="ok">Refund</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

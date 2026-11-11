@@ -1,0 +1,19 @@
+{
+  "about": "Written after the rules were tuned on testset.json, and never used to change them. Scored once; results are reported as they came out.",
+  "cases": [
+    { "id": "h01", "label": "scam", "kind": "stranger", "amount": 65000, "note": "deposit", "message": "Hey this was supposed to go to my contractor. Could you zelle it to me instead? PayPal holds refunds for weeks." },
+    { "id": "h02", "label": "scam", "kind": "stranger", "amount": 25000, "note": null, "message": "I am so sorry I sent you money by mistake. Kindly return it to this email: refunds.desk.help@example.org" },
+    { "id": "h03", "label": "scam", "kind": "stranger", "amount": 80000, "note": "inspection", "message": "Please return my money ASAP. Send it as a gift so there's no fee." },
+    { "id": "h04", "label": "scam", "kind": "overpayment", "amount": 95000, "order": 45000, "note": null, "message": "Included $500 for the transport company. Their agent will contact you for payment." },
+    { "id": "h05", "label": "scam", "kind": "stranger", "amount": 40000, "note": null, "message": "You received my payment by error. My PayPal account is under review, so pay it back to me with USDT or BTC." },
+    { "id": "h06", "label": "scam", "kind": "stranger", "amount": 15000, "note": null, "message": "Wrong recipient!! I need that back right now, send it to my cousin's Venmo @danny-r-22" },
+    { "id": "h07", "label": "scam", "kind": "overpayment", "amount": 60000, "order": 40000, "note": null, "message": "I overpaid by $200, my mistake. Just send $200 back to my wife's PayPal, she handles the money." },
+    { "id": "h08", "label": "benign", "kind": "stranger", "amount": 7500, "note": "commission deposit - the cat portrait", "message": null },
+    { "id": "h09", "label": "benign", "kind": "stranger", "amount": 32000, "note": null, "message": "So sorry, I think I paid the wrong shop. Can you please reverse the transaction? Thanks." },
+    { "id": "h10", "label": "benign", "kind": "expected", "amount": 18000, "order": 18000, "note": "lamp", "message": "Paid, will pick up Saturday." },
+    { "id": "h11", "label": "benign", "kind": "payout", "amount": 5120, "note": "Class action settlement distribution", "message": null },
+    { "id": "h12", "label": "benign", "kind": "overpayment", "amount": 26000, "order": 25000, "note": null, "message": "added $10 for the gift wrap you mentioned" },
+    { "id": "h13", "label": "benign", "kind": "customer", "amount": 12000, "note": "for next month's box", "message": null },
+    { "id": "h14", "label": "benign", "kind": "stranger", "amount": 3000, "note": "happy birthday!!", "message": null }
+  ]
+}
